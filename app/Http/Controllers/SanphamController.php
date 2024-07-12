@@ -22,7 +22,7 @@ class SanphamController extends Controller
     {
         //
         $listSanPham = $this->san_phams->getAll();
-        
+        $listSanPham = SanPham::paginate(2);
         // đưa hết dữ liệu trong $listSanPham đổ về trang sản phẩm
         return view('admin.sanpham.index', [
             'san_phams' => $listSanPham
