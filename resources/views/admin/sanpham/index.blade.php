@@ -11,8 +11,17 @@
             <div class="table-responsive">
               <table
                 id="basic-datatables"
-                class="display table table-striped table-hover"
-              >
+                class="display table table-striped table-hover">
+                {{-- thêm sản phẩm --}}
+                <a href=" {{ route('sanpham.create') }} ">
+                  <button class="btn btn-primary">
+                    <span class="btn-label">
+                      <i class="fa fa-plus"></i>
+                    </span>
+                    Thêm Sản Phẩm
+                  </button>
+
+                </a>
                 <thead>
                   <tr>
                     <th>Tên sản phẩm</th>
@@ -20,6 +29,7 @@
                     <th>Số lượng</th>
                     <th>Giá</th>
                     <th>Loại</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
@@ -28,7 +38,8 @@
                     <th>Ảnh sản phẩm</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
-                    <th>Loại</th>>
+                    <th>Loại</th>
+                    <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
@@ -37,10 +48,32 @@
                         @foreach ($san_phams as $san_pham)
                         <tr>
                             <td>{{ $san_pham->ten_san_pham }}</td>
-                            <td>{{ $san_pham->anh_san_pham }}</td>
+                            <td>
+                              <img width="100" src="{{ Storage::url($san_pham->anh_san_pham) }}" alt="">
+                            </td>
                             <td>{{ $san_pham->so_luong }}</td>  
                             <td>{{ $san_pham->gia }}</td>
-                            <td>{{ $san_pham->ten_danh_muc }}</td>
+                            <td>{{ $san_pham->danh_mucs_id }}</td>
+                            <td>
+                              {{-- sửa sản phẩm  --}}
+                              <a href="{{ route('sanpham.edit', $san_pham->id) }}">
+                                <button class="btn btn-warning">
+                                  <span class="btn-label">
+                                    <i class="fa fa-info"></i>
+                                  </span>
+                                  Sửa
+                                </button>
+                              </a>
+                              {{-- xóa sản phẩm --}}
+                              <a href="">
+                                <button class="btn btn-danger">
+                                  <span class="btn-label">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                  </span>
+                                  Xóa
+                                </button>
+                              </a>
+                            </td>
                         </tr>
                         @endforeach
                     @endif

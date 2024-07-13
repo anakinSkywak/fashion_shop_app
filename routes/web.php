@@ -22,6 +22,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     });
-
+    
+    // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
 });
+

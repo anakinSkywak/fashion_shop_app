@@ -46,7 +46,7 @@
                     <h4 class="text-section">Components</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('sanpham.index') }}">
+                    <a href="">
                         <i class="fas fa-layer-group"></i>
                         <p>Danh Mục Sản Phẩm</p>
                         <span class="caret"></span>
@@ -102,7 +102,7 @@
                     </div> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#sidebarLayouts">
+                    <a href="{{ route('sanpham.index') }}">
                         <i class="fas fa-th-list"></i>
                         <p>Sản Phẩm</p>
                         <span class="caret"></span>
