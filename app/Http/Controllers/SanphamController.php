@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DanhMuc;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SanphamController extends Controller
 {
@@ -106,7 +107,37 @@ class SanphamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // sử lý update
+        $san_pham = $this->san_phams->find($id);
+
+        if($request->hasFile('anh_san_pham')){
+            if($san_pham->anh_san_pham){
+                Storage::disk('public')->delete($san_pham->anh_san_pham);
+            }
+
+            // lưu ảnh mới
+
+            $fileName = $request->file('anh_san_pham')->store('uploads/sanpham', 'public');
+
+        }else{
+            $fileName = $san_pham->anh_san_pham;
+        }
+
+        $dataUpdate = [
+            'id' => $id,
+            'ten_san_pham' => $request->ten_san_pham,
+            'so_luong' => $request->so_luong,
+            'gia' => $request->gia,
+            'mo_ta' => $request->mo_ta,
+            'danh_mucs_id' => $request->danh_mucs_id,
+            'anh_san_pham' => $fileName,
+        ];
+
+        $this->san_phams->updateSanPham($dataUpdate, $id);
+
+        return redirect()->route('sanpham.index');
+
+
     }
 
     /**
@@ -115,5 +146,19 @@ class SanphamController extends Controller
     public function destroy(string $id)
     {
         //
+        $san_pham = $this->san_phams->find($id);
+
+        if(!$san_pham){
+            return redirect()->route('sanpham.index');
+
+        }
+        if($san_pham->anh_san_pham){
+            Storage::disk('public')->delete($san_pham->anh_san_pham);
+        }
+        
+        $san_pham->delete();
+        return redirect()->route('sanpham.index');
+
+
     }
 }

@@ -16,9 +16,10 @@
                                 <div class="col-lg-10 col-md-8 ml-auto">
                                     <div class="row align-items-center pt-md-5 mt-md-5 mb-5">
                                         <div class="col-12">
-                                            <form action="{{ route('sanpham.store') }}" method="POST" enctype="multipart/form-data">
+                                            <form action="{{ route('sanpham.update', $san_pham->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 {{ csrf_field() }}
+                                                @method('put')
                                                 <div class="card">
                                                     <div class="card-title text-center mt-3">
                                                         <h3>Sửa sản phẩm</h3>
@@ -73,7 +74,7 @@
                                                                 <label class="custom-file-label" for="anh">Chọn ảnh cho sản phẩm của bạn...</label>
                                                                 <div class="invalid-feedback">File Format Not Supported</div>
                                                             </div>
-                                                            <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Thêm mới sản phẩm</button>
+                                                            <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Cập nhật sản phẩm</button>
                                                         </form>
                                                     </div>
                                                 </div>

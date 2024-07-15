@@ -9,19 +9,16 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
+              {{-- Thêm sản phẩm --}}
+              <a href="{{ route('sanpham.create') }}" class="btn btn-primary mb-3">
+                <span class="btn-label">
+                  <i class="fa fa-plus"></i>
+                </span>
+                Thêm Sản Phẩm
+              </a>
               <table
                 id="basic-datatables"
                 class="display table table-striped table-hover">
-                {{-- thêm sản phẩm --}}
-                <a href=" {{ route('sanpham.create') }} ">
-                  <button class="btn btn-primary">
-                    <span class="btn-label">
-                      <i class="fa fa-plus"></i>
-                    </span>
-                    Thêm Sản Phẩm
-                  </button>
-
-                </a>
                 <thead>
                   <tr>
                     <th>Tên sản phẩm</th>
@@ -43,7 +40,6 @@
                   </tr>
                 </tfoot>
                 <tbody>
-                  
                     @if (!empty($san_phams))
                         @foreach ($san_phams as $san_pham)
                         <tr>
@@ -53,9 +49,9 @@
                             </td>
                             <td>{{ $san_pham->so_luong }}</td>  
                             <td>{{ $san_pham->gia }}</td>
-                            <td>{{ $san_pham->danh_mucs_id }}</td>
+                            <td>{{ $san_pham->ten_danh_muc }}</td>
                             <td>
-                              {{-- sửa sản phẩm  --}}
+                              {{-- Sửa sản phẩm --}}
                               <a href="{{ route('sanpham.edit', $san_pham->id) }}">
                                 <button class="btn btn-warning">
                                   <span class="btn-label">
@@ -64,20 +60,21 @@
                                   Sửa
                                 </button>
                               </a>
-                              {{-- xóa sản phẩm --}}
-                              <a href="">
-                                <button class="btn btn-danger">
-                                  <span class="btn-label">
-                                    <i class="fa fa-exclamation-circle"></i>
-                                  </span>
-                                  Xóa
-                                </button>
-                              </a>
+                              {{-- Xóa sản phẩm --}}
+                              <form action="{{ route('sanpham.destroy', $san_pham->id) }}" method="post" style="display:inline-block">
+                                @csrf
+                                @method('delete')
+                                  <button onclick="return confirm('Bạn có chắc muốn xóa sản phẩm?')" class="btn btn-danger">
+                                    <span class="btn-label">
+                                      <i class="fa fa-exclamation-circle"></i>
+                                    </span>
+                                    Xóa 
+                                  </button>
+                              </form>
                             </td>
                         </tr>
                         @endforeach
                     @endif
-                    
                 </tbody>
             </table>
             {{ $san_phams->links('pagination::bootstrap-5') }}
