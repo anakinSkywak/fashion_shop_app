@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
+use App\Http\Controllers\TaikhoanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('admin.home');
+
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('admin.home');
+// Route::prefix('admin')
+   
+//     ->group(function () {
+        // Route::prefix('danhmuc')
+        //     ->as('danhmuc.')
+        //     ->group(function () {
+        //         Route::get('/', [DanhMucController::class, 'index'])->name('index');
+        //         Route::get('create', [DanhMucController::class, 'create'])->name('create');
+        //         Route::post('store', [DanhMucController::class, 'store'])->name('store');
+        //         Route::get('show/{id}', [DanhMucController::class, 'show'])->name('show');
+        //         Route::get('{id}/edit', [DanhMucController::class, 'edit'])->name('edit');
+        //         Route::put('{id}/update', [DanhMucController::class, 'update'])->name('update');
+        //         Route::get('{id}/destroy', [DanhMucController::class, 'destroy'])->name('destroy');
+            // });
+//       Route::resource('sanpham', SanphamController::class);
+//       Route::resource('danhmuc', DanhMucController::class);
+//       Route::get('/', function () {
+//         return view('admin.index');
+//     })->name('admin.home');
+//     });
+ 
+// });
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
-    });
-
+    })->name('admin.home');
+    
+    // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
+
+    Route::resource('taikhoan', TaikhoanController::class);
+
+    Route::resource('danhmuc', DanhMucController::class);
+
 });
+
+
+

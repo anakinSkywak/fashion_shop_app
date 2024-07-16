@@ -24,7 +24,7 @@
         <div class="sidebar-content">
             <ul class="nav nav-secondary">
                 <li class="nav-item active">
-                    <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="{{ route('admin.home') }}" class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Dashboard</p>
                         <span class="caret"></span>
@@ -32,7 +32,7 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../demo1/index.html">
+                                <a href="{{ route('admin.home') }}">
                                     <span class="sub-item">Dashboard 1</span>
                                 </a>
                             </li>
@@ -46,7 +46,7 @@
                     <h4 class="text-section">Components</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('sanpham.index') }}">
+                    <a href="{{route('danhmuc.index')}}">
                         <i class="fas fa-layer-group"></i>
                         <p>Danh Mục Sản Phẩm</p>
                         <span class="caret"></span>
@@ -102,7 +102,7 @@
                     </div> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#sidebarLayouts">
+                    <a href="{{ route('sanpham.index') }}">
                         <i class="fas fa-th-list"></i>
                         <p>Sản Phẩm</p>
                         <span class="caret"></span>
@@ -123,7 +123,7 @@
                     </div> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#forms">
+                    <a href="{{ route('taikhoan.index') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Tài Khoản</p>
                         <span class="caret"></span>
