@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SanphamController;
+use App\Http\Controllers\TaikhoanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ Route::prefix('admin')->group(function () {
     
     // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
+    Route::resource('taikhoan', TaikhoanController::class);
 });
 
 

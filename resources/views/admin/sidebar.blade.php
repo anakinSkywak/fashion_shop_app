@@ -32,7 +32,7 @@
                     <div class="collapse" id="dashboard">
                         <ul class="nav nav-collapse">
                             <li>
-                                <a href="../demo1/index.html">
+                                <a href="{{ route('admin.home') }}">
                                     <span class="sub-item">Dashboard 1</span>
                                 </a>
                             </li>
@@ -123,7 +123,7 @@
                     </div> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#forms">
+                    <a href="{{ route('taikhoan.index') }}">
                         <i class="fas fa-pen-square"></i>
                         <p>Tài Khoản</p>
                         <span class="caret"></span>

@@ -22,16 +22,26 @@ class SanphamController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Lấy danh sách sản phẩm từ repository
         $listSanPham = $this->san_phams->getAll();
-        $listSanPham = SanPham::paginate(10);
-        // đưa hết dữ liệu trong $listSanPham đổ về trang sản phẩm
+
+        // Tìm kiếm sản phẩm nếu có từ khóa
+        if(!empty($request->keyword)){
+            $keyword = $request->keyword;
+            $listSanPham = SanPham::where('ten_san_pham', 'like', '%' . $keyword . '%')->paginate(10);
+        } else {
+            // Nếu không có từ khóa, hiển thị tất cả sản phẩm
+            $listSanPham = SanPham::paginate(10);
+        }
+
+        // Đưa dữ liệu $listSanPham ra view
         return view('admin.sanpham.index', [
             'san_phams' => $listSanPham
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

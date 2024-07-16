@@ -35,35 +35,30 @@
                 class="display table table-striped table-hover">
                 <thead>
                   <tr>
-                    <th>Tên sản phẩm</th>
-                    <th>Ảnh sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                    <th>Loại</th>
+                    <th>Tên Tài Khoản</th>
+                    <th>Email</th>
+                    <th>Số điện Thoại</th>
+                    <th>Role</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Tên sản phẩm</th>
-                    <th>Ảnh sản phẩm</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                    <th>Loại</th>
+                    <th>Tên Tài Khoản</th>
+                    <th>Email</th>
+                    <th>Số điện Thoại</th>
+                    <th>Role</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                    @if (!empty($san_phams))
-                        @foreach ($san_phams as $san_pham)
+                    @if (!empty($tai_khoans))
+                        @foreach ($tai_khoans as $tai_khoan)
                         <tr>
-                            <td>{{ $san_pham->ten_san_pham }}</td>
-                            <td>
-                              <img width="100" src="{{ Storage::url($san_pham->anh_san_pham) }}" alt="">
-                            </td>
-                            <td>{{ $san_pham->so_luong }}</td>  
-                            <td>{{ $san_pham->gia }}</td>
-                            <td>{{ $san_pham->ten_danh_muc }}</td>
+                            <td>{{ $tai_khoan->Ten_tai_khoan  }}</td>
+                            <td>{{ $san_pham->email  }}</td>  
+                            <td>{{ $san_pham->so_dien_thoai}}</td>
+                            <td>{{ $san_pham->role }}</td>
                             <td>
                               {{-- Sửa sản phẩm --}}
                               <a href="{{ route('sanpham.edit', $san_pham->id) }}">
@@ -91,7 +86,7 @@
                     @endif
                 </tbody>
             </table>
-            {{ $san_phams->links('pagination::bootstrap-5') }}
+            {{ $tai_khoans->links('pagination::bootstrap-5') }}
             </div>
           </div>
         </div>
