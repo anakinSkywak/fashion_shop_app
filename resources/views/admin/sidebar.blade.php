@@ -46,7 +46,7 @@
                     <h4 class="text-section">Components</h4>
                 </li>
                 <li class="nav-item">
-                    <a href="">
+                    <a href="{{route('danhmuc.index')}}">
                         <i class="fas fa-layer-group"></i>
                         <p>Danh Mục Sản Phẩm</p>
                         <span class="caret"></span>

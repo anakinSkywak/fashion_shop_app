@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DanhMuc;
 use Illuminate\Http\Request;
 
 class DanhMucController extends Controller
@@ -9,9 +10,17 @@ class DanhMucController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public $danh_mucs;
+    public function __construct(){
+        $this->danh_mucs = new DanhMuc;
+    }
     public function index()
     {
         //
+       $listDanhMuc = $this->danh_mucs->getDanhMuc();
+       return view('admin.danhmuc.index', [
+        'danh_mucs' => $listDanhMuc
+       ]);
     }
 
     /**
@@ -20,6 +29,7 @@ class DanhMucController extends Controller
     public function create()
     {
         //
+        
     }
 
     /**
@@ -36,6 +46,7 @@ class DanhMucController extends Controller
     public function show(string $id)
     {
         //
+        
     }
 
     /**
@@ -44,6 +55,7 @@ class DanhMucController extends Controller
     public function edit(string $id)
     {
         //
+        
     }
 
     /**
