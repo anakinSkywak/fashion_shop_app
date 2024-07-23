@@ -10,7 +10,7 @@
           <div class="card-body">
             <div class="table-responsive">
               {{-- Thêm sản phẩm --}}
-              <a href="{{ route('sanpham.create') }}" class="btn btn-primary mb-3">
+              <a href="{{ route('taikhoan.create') }}" class="btn btn-primary mb-3">
                 <span class="btn-label">
                   <i class="fa fa-plus"></i>
                 </span>
@@ -56,12 +56,12 @@
                         @foreach ($tai_khoans as $tai_khoan)
                         <tr>
                             <td>{{ $tai_khoan->Ten_tai_khoan  }}</td>
-                            <td>{{ $san_pham->email  }}</td>  
-                            <td>{{ $san_pham->so_dien_thoai}}</td>
-                            <td>{{ $san_pham->role }}</td>
+                            <td>{{ $tai_khoan->email  }}</td>  
+                            <td>{{ $tai_khoan->so_dien_thoai}}</td>
+                            <td>{{ $tai_khoan->role }}</td>
                             <td>
                               {{-- Sửa sản phẩm --}}
-                              <a href="{{ route('sanpham.edit', $san_pham->id) }}">
+                              <a href="{{ route('taikhoan.edit', $tai_khoan->id) }}">
                                 <button class="btn btn-warning">
                                   <span class="btn-label">
                                     <i class="fa fa-info"></i>
@@ -70,7 +70,7 @@
                                 </button>
                               </a>
                               {{-- Xóa sản phẩm --}}
-                              <form action="{{ route('sanpham.destroy', $san_pham->id) }}" method="post" style="display:inline-block">
+                              <form action="{{ route('taikhoan.destroy', $tai_khoan->id) }}" method="post" style="display:inline-block">
                                 @csrf
                                 @method('delete')
                                   <button onclick="return confirm('Bạn có chắc muốn xóa sản phẩm?')" class="btn btn-danger">

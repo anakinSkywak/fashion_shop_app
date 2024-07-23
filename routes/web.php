@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
-use App\Http\Controllers\TaikhoanController;
+use App\Http\Controllers\UserController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,15 +44,29 @@ use Illuminate\Support\Facades\Route;
  
 // });
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('web.home');
+
+
+
+
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.home');
+    Route::get('login', function () {
+        return view('admin.login');
+    })->name('admin.login');
+
+    Route::get('login', [UserController::class, 'login'])->name('admin.login');
+    Route::post('auth', [UserController::class, 'auth'])->name('admin.auth');
+    Route::get('logout', [UserController::class, 'logout'])->name('admin.logout');
     
     // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
 
-    Route::resource('taikhoan', TaikhoanController::class);
+    Route::resource('taikhoan', UserController::class);
 
     Route::resource('danhmuc', DanhMucController::class);
 

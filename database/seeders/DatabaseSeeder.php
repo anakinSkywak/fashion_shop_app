@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
             DanhMucSeeder::class,
             SanPhamSeeder::class,
             BannerSeeder::class,
-            KhienMaisSeeder::class,
+            KhienMaiSeeder::class,
+            UserSeeder::class,
             HoaDonSeeder::class,
             ChiTietHoaDonSeeder::class,
-            UserSeeder::class
         ]);
     }
 }
