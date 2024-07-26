@@ -3,6 +3,7 @@
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\TaikhoanController;
+use App\Http\Controllers\TrangchuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // })->name('admin.home');
 // Route::prefix('admin')
-   
+
 //     ->group(function () {
         // Route::prefix('danhmuc')
         //     ->as('danhmuc.')
@@ -40,20 +41,34 @@ use Illuminate\Support\Facades\Route;
 //         return view('admin.index');
 //     })->name('admin.home');
 //     });
- 
+
 // });
 
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.home');
-    
+
     // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
 
     Route::resource('taikhoan', TaikhoanController::class);
 
     Route::resource('danhmuc', DanhMucController::class);
+
+});
+
+Route::controller(TrangchuController::class)
+    ->name('trangchu.')
+    ->prefix('user/trangchu')
+    ->group(function(){
+        Route::get('/', 'index')->name('index');
+        // Route::get('/create', 'create')->name('index');
+        // Route::post('/store', 'store')->name('store');
+        // Route::get('/{id}/edit', 'edit')->name('edit')->where('id','[0+9]+');
+        // Route::get('/{id}/update', 'update')->name('update')->where('id','[0+9]+');
+        // Route::get('/{id}/destroy', 'destroy')->name('destroy')->where('id','[0+9]+');
+
 
 });
 
