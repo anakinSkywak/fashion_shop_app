@@ -12,7 +12,6 @@
                 <div class="container">
                     <section>
                         <div class="container-fluid">
-                            
                                 <div class="col-lg-10 col-md-8 ml-auto">
                                     <div class="row align-items-center pt-md-5 mt-md-5 mb-5">
                                         <div class="col-12">

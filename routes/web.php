@@ -3,7 +3,6 @@
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\TaikhoanController;
-use App\Http\Controllers\TrangchuController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +43,13 @@ use Illuminate\Support\Facades\Route;
 
 // });
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('web.home');
+
+
+
+
 Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
@@ -52,7 +58,7 @@ Route::prefix('admin')->group(function () {
     // Route này dùng để CRUD sanpham
     Route::resource('sanpham', SanphamController::class);
 
-    Route::resource('taikhoan', TaikhoanController::class);
+    Route::resource('taikhoan', UserController::class);
 
     Route::resource('danhmuc', DanhMucController::class);
 

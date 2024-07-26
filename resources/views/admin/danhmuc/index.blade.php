@@ -69,7 +69,7 @@
                     
                 </tbody>
             </table>
-            {{-- {{ $danh_mucs->links('pagination::bootstrap-5') }} --}}
+            {{ $danh_mucs->links('pagination::bootstrap-5') }}
             </div>
           </div>
         </div>
