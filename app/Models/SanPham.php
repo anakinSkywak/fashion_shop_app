@@ -47,6 +47,14 @@ class SanPham extends Model
        ]);
     }
 
+    //  lấy số lượng sản phẩm
+    public function getCountSanPham(){
+      $sl_san_pham =  DB::table('san_phams')->count();
+
+      return $sl_san_pham;
+      
+   }
+
 
 
 

@@ -24,4 +24,11 @@ class DanhMuc extends Model
        return $danh_muc;
        
     }
+   //  lấy số lượng danh mục
+    public function getCountDanhMuc(){
+       $sl_danh_muc =  DB::table('danh_mucs')->count();
+
+       return $sl_danh_muc;
+       
+    }
 }

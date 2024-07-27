@@ -129,7 +129,6 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->route('admin.login')->withInput()->withErrors($validator);
         }
-dd(Auth::attempt());
         if(Auth::attempt(['email' => $request->email , 'password' => $request->password])) {
             return redirect()->route('admin.home');
         }
@@ -141,8 +140,9 @@ dd(Auth::attempt());
     // thực hiện logout
     public function logout() {
         Auth::logout();
-        return redirect()->route('account.login');
+        return redirect()->route('admin.login');
     }
+    
 
 
 }

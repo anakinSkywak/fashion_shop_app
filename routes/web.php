@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
+use App\Http\Controllers\SoLuongController;
 use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Route;
@@ -52,14 +53,13 @@ Route::get('/', function () {
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('admin.home');
+    Route::get('/', [SoLuongController::class, 'count']
+      )->name('admin.home');
     Route::get('login', function () {
         return view('admin.login');
     })->name('admin.login');
 
-    Route::get('login', [UserController::class, 'login'])->name('admin.login');
+    Route::get('login', [UserController::class, 'login'] )->name('admin.login');
     Route::post('auth', [UserController::class, 'auth'])->name('admin.auth');
     Route::get('logout', [UserController::class, 'logout'])->name('admin.logout');
     
