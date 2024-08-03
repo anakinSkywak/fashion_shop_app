@@ -30,7 +30,7 @@ class DanhMucController extends Controller
     public function create()
     {
         //
-        
+        return view('admin.danhmuc.add');
     }
 
     /**
@@ -39,6 +39,14 @@ class DanhMucController extends Controller
     public function store(Request $request)
     {
         //
+
+        $danh_muc = [
+           'ten_danh_muc' => $request -> ten_danh_muc
+        ];
+
+        $this->danh_mucs->addDanhMuc($danh_muc);
+
+        return redirect()->route('admin.danhmuc.index');
     }
 
     /**
@@ -47,6 +55,7 @@ class DanhMucController extends Controller
     public function show(string $id)
     {
         //
+       
         
     }
 
@@ -56,7 +65,11 @@ class DanhMucController extends Controller
     public function edit(string $id)
     {
         //
-        
+        $danh_muc = $this->danh_mucs->getOneDanhMuc($id);
+
+        return view('admin.danhmuc.update',[
+            'danh_muc' => $danh_muc
+        ]);
     }
 
     /**
@@ -65,6 +78,12 @@ class DanhMucController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $danh_muc = [
+            'ten_danh_muc' => $request -> ten_danh_muc
+        ];
+        $this->danh_mucs->updateDanhMuc($danh_muc, $id);
+
+        return redirect()->route('danhmuc.index');
     }
 
     /**
@@ -73,5 +92,12 @@ class DanhMucController extends Controller
     public function destroy(string $id)
     {
         //
+        $this->danh_mucs->deleteDanhMuc($id);
+
+        // Delete the resource
+        // $danh_muc->delete();
+
+        // // Redirect with success message
+         return redirect()->route('danhmuc.index');
     }
 }

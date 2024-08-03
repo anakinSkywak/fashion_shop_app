@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\DanhMucController;
-use App\Http\Controllers\SanphamController;
-use App\Http\Controllers\SoLuongController;
+use App\Http\Controllers\CartProductController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DanhMucController;
+use App\Http\Controllers\SanphamController;
+
+use App\Http\Controllers\SoLuongController;
+
+use App\Http\Controllers\TrangChuUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // })->name('admin.home');
 // Route::prefix('admin')
-   
+
 //     ->group(function () {
         // Route::prefix('danhmuc')
         //     ->as('danhmuc.')
@@ -42,35 +46,47 @@ use Illuminate\Support\Facades\Route;
 //         return view('admin.index');
 //     })->name('admin.home');
 //     });
- 
+
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('web.home');
-
-
-
+Route::get('/', [TrangChuUserController::class, 'index',])->name('web.home');
+Route::get('/shop', [TrangChuUserController::class, 'shop',])->name('web.shop');
+Route::get('/shopDetail/{id}', [TrangChuUserController::class, 'shopDetail',])->name('web.shopDetail');
+Route::get('/login', [TrangChuUserController::class, 'login',])->name('web.login');
+Route::post('/login', [TrangChuUserController::class, 'auth'])->name('web.auth');
+Route::get('/logout', [TrangChuUserController::class, 'logout'])->name('web.logout');
+Route::get('/cartProduct', [CartProductController::class, 'cartProduct'])
+    ->middleware('auth')
+    ->name('web.cartProduct');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', [SoLuongController::class, 'count']
-      )->name('admin.home');
+    Route::get('/', [SoLuongController::class, 'count'])->name('admin.home');
+
     Route::get('login', function () {
         return view('admin.login');
     })->name('admin.login');
 
-    Route::get('login', [UserController::class, 'login'] )->name('admin.login');
     Route::post('auth', [UserController::class, 'auth'])->name('admin.auth');
     Route::get('logout', [UserController::class, 'logout'])->name('admin.logout');
-    
-    // Route này dùng để CRUD sanpham
+
+    // Các tuyến dùng để CRUD sản phẩm
     Route::resource('sanpham', SanphamController::class);
-
     Route::resource('taikhoan', UserController::class);
-
     Route::resource('danhmuc', DanhMucController::class);
-
 });
+// Route::controller(TrangchuController::class)
+//     ->name('trangchu.')
+//     ->prefix('user/trangchu')
+//     ->group(function(){
+//         Route::get('/', 'index')->name('index');
+//         // Route::get('/create', 'create')->name('index');
+//         // Route::post('/store', 'store')->name('store');
+//         // Route::get('/{id}/edit', 'edit')->name('edit')->where('id','[0+9]+');
+//         // Route::get('/{id}/update', 'update')->name('update')->where('id','[0+9]+');
+//         // Route::get('/{id}/destroy', 'destroy')->name('destroy')->where('id','[0+9]+');
+
+
+// });
 
 
 
