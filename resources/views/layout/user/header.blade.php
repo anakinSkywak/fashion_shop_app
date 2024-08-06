@@ -26,7 +26,7 @@
                             </ul>
                         @else
                         <li class="account_area"><a href="{{ route('web.login') }}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
-                        <li class="account_area"><a href="{{ route('web.login') }}"><i class="fa fa-lock"></i> Đăng ký</a></li>
+                        <li class="account_area"><a href="{{ route('register') }}"><i class="fa fa-lock"></i> Đăng ký</a></li>
                         @endif
                     </ul>
                 </div>

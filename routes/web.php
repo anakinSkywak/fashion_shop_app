@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\TaikhoanController;
@@ -57,6 +58,15 @@ Route::get('/shopDetail/{id}', [TrangChuUserController::class, 'shopDetail',])->
 Route::get('/login',           [TrangChuUserController::class, 'login',])->name('web.login');
 Route::post('/login',          [TrangChuUserController::class, 'auth'])->name('web.auth');
 Route::get('/logout',          [TrangChuUserController::class, 'logout'])->name('web.logout');
+
+Route::controller(TrangChuUserController::class)
+    ->group(function (){
+        Route::get('/register', 'register')->name('register');
+        Route::post('/register', 'postRegister')->name('postRegister');
+    });
+
+Route::get('/banners', [BannerController::class, 'index'])->name('banners.index');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/cartProduct', [CartProductController::class, 'cartProduct'])->name('web.cartProduct');

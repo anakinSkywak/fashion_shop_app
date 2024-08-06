@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\SanPham;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class TrangChuUserController extends Controller
@@ -55,6 +57,21 @@ class TrangChuUserController extends Controller
     }
 
     // login web
+
+    public function register(){
+        return view('user.register');
+    }
+    public function postRegister(Request $request){
+//
+        $request->merge(['password'=> Hash::make($request->password)]);
+        $objUser = new User();
+        $res = $objUser->insertDataUser($request->all());
+        if($res){
+            return redirect()->back()->with('success', 'Tài khoản thêm mới thành công!');
+        }else{
+            return redirect()->back()->with('error', 'Tài khoản thêm mới không thành công!');
+        }
+    }
     public function login()
     {
         return view('user.login');

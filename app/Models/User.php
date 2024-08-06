@@ -51,4 +51,9 @@ class User extends Authenticatable
         return $this->hasMany(DonHang::class);
     }
 
+    public function insertDataUser($params){
+        $res = User::query()->create($params);
+        return $res;
+    }
+
 }
