@@ -3,6 +3,8 @@
 use App\Http\Controllers\DanhMucController;
 use App\Http\Controllers\SanphamController;
 use App\Http\Controllers\TaikhoanController;
+use App\Http\Controllers\TrangchuController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
