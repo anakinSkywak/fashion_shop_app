@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 
-class TrangchuController extends Controller
+class DonHangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -12,7 +13,14 @@ class TrangchuController extends Controller
     public function index()
     {
         //
-         return view('user.trangchu.index');
+        $donHangs = DonHang::query()->orderByDesc('id')->get();
+        $donHangs = DonHang::paginate(10);
+        $trangThai = DonHang::TRANG_THAI_DON_HANG;
+        return view('admin.donhang.index', [
+            'donHangs' => $donHangs,
+            'trangThai' => $trangThai,
+        ]);
+
     }
 
     /**

@@ -13,7 +13,7 @@
                 id="basic-datatables"
                 class="display table table-striped table-hover">
                 {{-- thêm sản phẩm --}}
-                <a href=" {{ route('sanpham.create') }} ">
+                <a href=" {{ route('danhmuc.create') }} ">
                   <button class="btn btn-primary">
                     <span class="btn-label">
                       <i class="fa fa-plus"></i>
@@ -54,14 +54,18 @@
                                 </button>
                               </a>
                               {{-- xóa sản phẩm --}}
-                              <a href="">
-                                <button class="btn btn-danger">
-                                  <span class="btn-label">
-                                    <i class="fa fa-exclamation-circle"></i>
-                                  </span>
-                                  Xóa
-                                </button>
-                              </a>
+                              <form action="{{ route('danhmuc.destroy', $danhmuc->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                
+                                  <button onclick="confirm('bạn có muốn xóa danh mục này?')" class="btn btn-danger">
+                                    <span class="btn-label">
+                                      <i class="fa fa-exclamation-circle"></i>
+                                    </span>
+                                    Xóa
+                                  </button>
+                                
+                              </form>
                             </td>
                         </tr>
                         @endforeach
