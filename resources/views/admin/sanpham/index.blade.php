@@ -1,6 +1,56 @@
 @extends('layout.admin')
 
 @section('main')
+@if(session('success'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+
+    <script>
+        // Tự động ẩn thông báo sau 3 giây (3000ms)
+        setTimeout(function() {
+            var messageElement = document.getElementById('success-message');
+            if (messageElement) {
+                messageElement.style.opacity = '0';
+                setTimeout(function() {
+                    messageElement.style.display = 'none';
+                }, 600); // 600ms để đảm bảo hiệu ứng fade out
+            }
+        }, 3000); // 3 giây
+    </script>
+
+    <style>
+        .alert {
+            transition: opacity 0.6s ease;
+        }
+    </style>
+@endif
+@if(session('success'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+
+    <script>
+        // Tự động ẩn thông báo sau 3 giây (3000ms)
+        setTimeout(function() {
+            var messageElement = document.getElementById('success-message');
+            if (messageElement) {
+                messageElement.style.opacity = '0';
+                setTimeout(function() {
+                    messageElement.style.display = 'none';
+                }, 600); // 600ms để đảm bảo hiệu ứng fade out
+            }
+        }, 3000); // 3 giây
+    </script>
+
+    <style>
+        .alert {
+            transition: opacity 0.6s ease;
+        }
+    </style>
+@endif
+
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -24,8 +74,8 @@
                             <input type="text" class="form-control form-control-lg" name="keyword" placeholder="Tìm kiếm sản phẩm">
                         </div>
                         <div class="col-lg-1 col-md-1 ">
-                            <button class="btn btn-primary btn-lg w-100"><i class="fa-solid fa-magnifying-glass"></i></button>                                                                    
-                        </div>                                                                                 
+                            <button class="btn btn-primary btn-lg w-100"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
                     </div>
                 </div>
 
@@ -61,7 +111,7 @@
                             <td>
                               <img width="100" src="{{ Storage::url($san_pham->anh_san_pham) }}" alt="">
                             </td>
-                            <td>{{ $san_pham->so_luong }}</td>  
+                            <td>{{ $san_pham->so_luong }}</td>
                             <td>{{ $san_pham->gia }}</td>
                             <td>{{ $san_pham->ten_danh_muc }}</td>
                             <td>
@@ -82,7 +132,7 @@
                                     <span class="btn-label">
                                       <i class="fa fa-exclamation-circle"></i>
                                     </span>
-                                    Xóa 
+                                    Xóa
                                   </button>
                               </form>
                             </td>
@@ -97,5 +147,5 @@
         </div>
       </div>
  </div>
- 
+
 @endsection
