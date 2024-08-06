@@ -62,14 +62,19 @@
 									<img width="100" src="{{ Storage::url($san_pham->anh_san_pham) }}" alt="">
 									<div class="box-content">
 										{{-- <a href="#"><i class="fa fa-heart-o"></i></a> --}}
-										<a href="#"><i class="fa fa-cart-plus"></i></a>
+										<form action="{{ route('web.addCart') }}" method="post" class="d-inline">
+											@csrf
+											<input type="hidden" name="product_id" value="{{ $san_pham->id }}">
+											<input type="hidden" name="quantity" value="1">
+											<button type="submit" class="btn btn-link p-0"><a><i class="fa fa-cart-plus"></a></i></button>
+										</form>
 										<a href="{{ route('web.shopDetail', $san_pham->id) }}"><i class="fa fa-search"></i></a>
 									</div>										
 								</div>
 
 								<div class="product_btm_text">
 									<h4><a href="{{ route('web.shopDetail', $san_pham->id) }}">{{ $san_pham->ten_san_pham }}</a></h4>
-									<span class="price">{{ $san_pham->gia }} VND</span>
+									<span class="price">{{ number_format($san_pham->gia, 0, '', '.') }} VND</span>
 								</div>
 							</div>								
 						</div> <!-- End Col -->						

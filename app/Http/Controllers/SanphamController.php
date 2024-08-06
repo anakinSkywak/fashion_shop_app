@@ -28,7 +28,7 @@ class SanphamController extends Controller
         $listSanPham = $this->san_phams->getAll();
 
         // Tìm kiếm sản phẩm nếu có từ khóa
-        if(!empty($request->keyword)){
+        if (!empty($request->keyword)) {
             $keyword = $request->keyword;
             $listSanPham = SanPham::where('ten_san_pham', 'like', '%' . $keyword . '%')->paginate(10);
         } else {
@@ -60,27 +60,27 @@ class SanphamController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Xử lý hình ảnh
-    if($request->hasFile('anh_san_pham')){
-        $fileName = $request->file('anh_san_pham')->store('uploads/sanpham', 'public');
-    } else {
-        $fileName = null;
+    {
+        // Xử lý hình ảnh
+        if ($request->hasFile('anh_san_pham')) {
+            $fileName = $request->file('anh_san_pham')->store('uploads/sanpham', 'public');
+        } else {
+            $fileName = null;
+        }
+
+        $dataInsert = [
+            'ten_san_pham' => $request->ten_san_pham,
+            'so_luong' => $request->so_luong,
+            'gia' => $request->gia,
+            'mo_ta' => $request->mo_ta,
+            'danh_mucs_id' => $request->danh_mucs_id,
+            'anh_san_pham' => $fileName,
+        ];
+
+        $this->san_phams->createSanPham($dataInsert);
+
+        return redirect()->route('sanpham.index');
     }
-
-    $dataInsert = [
-        'ten_san_pham' => $request->ten_san_pham,
-        'so_luong' => $request->so_luong,
-        'gia' => $request->gia,
-        'mo_ta' => $request->mo_ta,
-        'danh_mucs_id' => $request->danh_mucs_id,
-        'anh_san_pham' => $fileName,
-    ];
-
-    $this->san_phams->createSanPham($dataInsert);
-
-    return redirect()->route('sanpham.index');
-}
 
 
     /**
@@ -89,7 +89,7 @@ class SanphamController extends Controller
     public function show(string $id)
     {
         //
-        
+
     }
 
     /**
@@ -102,7 +102,7 @@ class SanphamController extends Controller
         $danh_mucs = $this->danh_mucs->getDanhMuc();
 
         // khi sản phẩm ko tồn tại thì trở về trang sản phẩm
-        if(!$san_pham){
+        if (!$san_pham) {
             return redirect()->route('sanpham.index');
         }
 
@@ -120,16 +120,15 @@ class SanphamController extends Controller
         // sử lý update
         $san_pham = $this->san_phams->find($id);
 
-        if($request->hasFile('anh_san_pham')){
-            if($san_pham->anh_san_pham){
+        if ($request->hasFile('anh_san_pham')) {
+            if ($san_pham->anh_san_pham) {
                 Storage::disk('public')->delete($san_pham->anh_san_pham);
             }
 
             // lưu ảnh mới
 
             $fileName = $request->file('anh_san_pham')->store('uploads/sanpham', 'public');
-
-        }else{
+        } else {
             $fileName = $san_pham->anh_san_pham;
         }
 
@@ -146,8 +145,6 @@ class SanphamController extends Controller
         $this->san_phams->updateSanPham($dataUpdate, $id);
 
         return redirect()->route('sanpham.index');
-
-
     }
 
     /**
@@ -158,17 +155,14 @@ class SanphamController extends Controller
         //
         $san_pham = $this->san_phams->find($id);
 
-        if(!$san_pham){
+        if (!$san_pham) {
             return redirect()->route('sanpham.index');
-
         }
-        if($san_pham->anh_san_pham){
+        if ($san_pham->anh_san_pham) {
             Storage::disk('public')->delete($san_pham->anh_san_pham);
         }
-        
+
         $san_pham->delete();
         return redirect()->route('sanpham.index');
-
-
     }
 }

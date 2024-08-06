@@ -139,25 +139,12 @@
                     </div> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="#tables">
-                        <i class="fas fa-table"></i>
-                        <p>Thống Kê</p>
+                    <a href="{{ route('donhang.index') }}">
+                        <i class="fas fa-shopping-bag"></i>
+                        <p>Đơn hàng</p>
                         <span class="caret"></span>
                     </a>
-                    {{-- <div class="collapse" id="tables">
-                        <ul class="nav nav-collapse">
-                            <li>
-                                <a href="tables/tables.html">
-                                    <span class="sub-item">Basic Table</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="tables/datatables.html">
-                                    <span class="sub-item">Datatables</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div> --}}
+            
                 </li>
                 {{-- <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#maps">

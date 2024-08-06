@@ -11,17 +11,18 @@ class DanhMucController extends Controller
      * Display a listing of the resource.
      */
     public $danh_mucs;
-    public function __construct(){
+    public function __construct()
+    {
         $this->danh_mucs = new DanhMuc;
     }
     public function index()
     {
         //
-       $listDanhMuc = $this->danh_mucs->getDanhMuc();
-       $listDanhMuc = DanhMuc::paginate(10);
-       return view('admin.danhmuc.index', [
-        'danh_mucs' => $listDanhMuc
-       ]);
+        $listDanhMuc = $this->danh_mucs->getDanhMuc();
+        $listDanhMuc = DanhMuc::paginate(10);
+        return view('admin.danhmuc.index', [
+            'danh_mucs' => $listDanhMuc
+        ]);
     }
 
     /**
@@ -41,7 +42,7 @@ class DanhMucController extends Controller
         //
 
         $danh_muc = [
-           'ten_danh_muc' => $request -> ten_danh_muc
+            'ten_danh_muc' => $request->ten_danh_muc
         ];
 
         $this->danh_mucs->addDanhMuc($danh_muc);
@@ -55,8 +56,8 @@ class DanhMucController extends Controller
     public function show(string $id)
     {
         //
-       
-        
+
+
     }
 
     /**
@@ -67,7 +68,7 @@ class DanhMucController extends Controller
         //
         $danh_muc = $this->danh_mucs->getOneDanhMuc($id);
 
-        return view('admin.danhmuc.update',[
+        return view('admin.danhmuc.update', [
             'danh_muc' => $danh_muc
         ]);
     }
@@ -79,7 +80,7 @@ class DanhMucController extends Controller
     {
         //
         $danh_muc = [
-            'ten_danh_muc' => $request -> ten_danh_muc
+            'ten_danh_muc' => $request->ten_danh_muc
         ];
         $this->danh_mucs->updateDanhMuc($danh_muc, $id);
 
@@ -98,6 +99,6 @@ class DanhMucController extends Controller
         // $danh_muc->delete();
 
         // // Redirect with success message
-         return redirect()->route('danhmuc.index');
+        return redirect()->route('danhmuc.index');
     }
 }

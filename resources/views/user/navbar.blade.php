@@ -2,7 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-3">
-                <a class="logo" href="index.html"> <img alt="" src="{{asset('assetsAdmin/img/logo.png')}}"></a>
+                <a class="logo" href="{{ route('web.home') }}"> <img alt=""
+                        src="{{ asset('assetsAdmin/img/logo.png') }}"></a>
             </div><!--  End Col -->
 
             <div class="col-xs-12 col-sm-12 col-md-9 text-right">
@@ -10,7 +11,7 @@
                     <div class="main-menu">
                         <nav>
                             <ul>
-                                <li><a href="index.html">Trang chủ</a>
+                                <li><a href="{{ route('web.home') }}">Trang chủ</a>
                                 </li>
 
                                 <li><a href="{{ route('web.shop') }}">Cửa Hàng</a>
@@ -23,23 +24,25 @@
                                     </ul> --}}
                                 </li>
                                 <li><a href="shop.html">Thể Loại<i class="fa fa-angle-down"></i></a>
-                                    <!-- Mega Menu -->
+                                    <!-- Mega Menu -->@php
+                                            $danh_mucs = \App\Models\DanhMuc::query()
+                                            ->get();
+                                        @endphp
                                     <div class="mega-menu mm-4-column mm-left">
                                         @foreach ($danh_mucs as $danh_muc)
-                                            
-                                        <div class="mm-column mm-column-link float-left">
-                                            <a href="#">{{ $danh_muc->ten_danh_muc }}</a>
-                                            {{-- <a href="#">Jackets</a>
+                                            <div class="mm-column mm-column-link float-left">
+                                                <a href="#">{{ $danh_muc->ten_danh_muc }}</a>
+                                                {{-- <a href="#">Jackets</a>
                                             <a href="#">Collections</a>
                                             <a href="#">T-Shirts</a>
                                             <a href="#">jens pant’s</a>
                                             <a href="#">sports shoes</a> --}}
-                                        </div>
+                                            </div>
                                         @endforeach
 
                                     </div>
                                 </li>
-                                
+
 
                                 <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                     <!-- Sub Menu -->
@@ -115,8 +118,10 @@
                                     <div class="search-box">
                                         <form action="#" method="get">
                                             <div class="input-group">
-                                                <input type="text" class="form-control"  placeholder="enter keyword"/>
-                                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                <input type="text" class="form-control"
+                                                    placeholder="enter keyword" />
+                                                <button type="submit" class="btn btn-default"><i
+                                                        class="fa fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -126,29 +131,34 @@
                             <li>
                                 <div class="cart_menu_area">
                                     <div class="cart_icon">
-                                        <a href="#"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
-                                        <span class="cart_number">2</span>
+                                        <a href="{{ route('web.cartProduct') }}"><i class="fa fa-shopping-bag " aria-hidden="true"></i></a>
+                                        <span class="cart_number">{{ session('cart') ? count(session('cart')) : 0 }}</span>
                                     </div>
 
 
                                     <!-- Mini Cart Wrapper -->
+                                    @if (session('cart'))
                                     <div class="mini-cart-wrapper">
                                         <!-- Product List -->
                                         <div class="mc-pro-list fix">
                                             <div class="mc-sin-pro fix">
-                                                <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/1.jpg" alt="" /></a>
+                                                <a href="#" class="mc-pro-image float-left"><img
+                                                        src="img/mini-cart/1.jpg" alt="" /></a>
                                                 <div class="mc-pro-details fix">
                                                     <a href="#">This is Product Name</a>
                                                     <span>1x$25.00</span>
-                                                    <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    <a class="pro-del" href="#"><i
+                                                            class="fa fa-times-circle"></i></a>
                                                 </div>
                                             </div>
                                             <div class="mc-sin-pro fix">
-                                                <a href="#" class="mc-pro-image float-left"><img src="img/mini-cart/2.jpg" alt="" /></a>
+                                                <a href="#" class="mc-pro-image float-left"><img
+                                                        src="img/mini-cart/2.jpg" alt="" /></a>
                                                 <div class="mc-pro-details fix">
                                                     <a href="#">This is Product Name</a>
                                                     <span>1x$25.00</span>
-                                                    <a class="pro-del" href="#"><i class="fa fa-times-circle"></i></a>
+                                                    <a class="pro-del" href="#"><i
+                                                            class="fa fa-times-circle"></i></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,6 +171,8 @@
                                             <a href="#" class="checkout_btn">checkout</a>
                                         </div>
                                     </div>
+                                        
+                                    @endif
                                 </div>
 
                             </li>

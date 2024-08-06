@@ -1,5 +1,26 @@
 @extends('layout.user.user')
 
+<style>
+	icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.icon-sm {
+    width: 2rem;
+    height: 2rem;
+    
+}
+	.icon-sm {
+    width: 2rem;
+    height: 2rem;
+    
+}
+</style>
+
 @section('main')
 
 	<!-- Product Details Area  -->
@@ -21,7 +42,7 @@
 						<div class="pd_price_dtls fix">
 							<!-- Product Price -->
 							<div class="pd_price">
-								<span class="new">{{ $san_pham->gia }} VND</span>
+								<span class="new">{{ number_format($san_pham->gia, 0, '', '.') }} VND</span>
 								<span class="old">(60.00)</span>
 							</div>
 							<!-- Product Ratting -->
@@ -47,26 +68,28 @@
 							<a href="#">xl</a>
 							<a href="#">xxl</a>
 						</div>
-						<div class="pd_clr_qntty_dtls fix">
-							<div class="pd_clr">
-								<h4>color:</h4>
-								<a href="#" class="active" style="background: #ffac9a;">color 1</a>
-								<a href="#" style="background: #ddd;">color 2</a>
-								<a href="#" style="background: #000000;">color 3</a>
-							</div>
-							<div class="pd_qntty_area">
-								<h4>quantity:</h4>
-								<div class="pd_qty fix">
-									<input value="1" name="qttybutton" class="cart-plus-minus-box" type="number" min="1" max="{{ $san_pham->so_luong }}">
+
+						<form action="{{ route('web.addCart') }}" method="post">
+							@csrf
+							<div class="pd_clr_qntty_dtls fix">
+								<div class="pd_qntty_area">
+									<h4>quantity:</h4>
+									<div class="pd_quantity">
+										<button type="button" class="minus btn btn-outline-secondary rounded-circle mx-1" data-field="quantity">-</button>
+										<input type="text" value="1" name="quantity" id="quantityInput" min="1" class="form-control text-center mx-1" style="width: 60px;">
+										<button type="button" class="plus btn btn-outline-secondary rounded-circle mx-1" data-field="quantity">+</button>
+										<input type="hidden" name="product_id" value="{{ $san_pham->id }}">
+									</div>
+									
 								</div>
 							</div>
-						</div>
-						<!-- Product Action -->
-						<div class="pd_btn fix">
-							<a class="btn btn-default acc_btn" href="{{ route('web.cartProduct') }}">Thêm vào giỏ hàng</a>
-							<a class="btn btn-default acc_btn btn_icn"><i class="fa fa-heart"></i></a>
-							<a class="btn btn-default acc_btn btn_icn"><i class="fa fa-refresh"></i></a>
-						</div>
+							<!-- Product Action -->
+							<div class="pd_btn fix">
+								<button type="submit" class="btn btn-default acc_btn">Thêm vào giỏ hàng</button>
+								<a class="btn btn-default acc_btn btn_icn"><i class="fa fa-heart"></i></a>
+								<a class="btn btn-default acc_btn btn_icn"><i class="fa fa-refresh"></i></a>
+							</div>
+						</form>
 						<div class="pd_share_area fix">
 							<h4>share this on:</h4>
 							<div class="pd_social_icon">
@@ -158,26 +181,67 @@
 				<div class="row">
                     @foreach ($san_phams as $san_pham)
                         
-                        <div class="col-lg-3 col-md-4 col-sm-6">
-                            <div class="single_product">
-                                <div class="product_image">
-                                    <img width="100" src="{{ Storage::url($san_pham->anh_san_pham) }}" alt="">
-                                    <div class="box-content">
-                                        {{-- <a href="#"><i class="fa fa-heart-o"></i></a> --}}
-                                        <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                        <a href="{{ route('web.shopDetail', $san_pham->id) }}"><i class="fa fa-search"></i></a>
-                                    </div>										
-                                </div>
-
-                                <div class="product_btm_text">
-                                    <h4><a href="{{ route('web.shopDetail', $san_pham->id) }}">{{ $san_pham->ten_san_pham }}</a></h4>
-                                    <span class="price">{{ $san_pham->gia }} VND/span>
-                                </div>
-                            </div>								
-                        </div> <!-- End Col -->			
+					<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+						<div class="single_product card h-100">
+							<div class="product_image position-relative">
+								<img src="{{ Storage::url($san_pham->anh_san_pham) }}" class="card-img-top" alt="{{ $san_pham->ten_san_pham }}">
+								<div class="box-content position-absolute top-50 start-50 translate-middle">
+									{{-- <a href="#"><i class="fa fa-heart-o"></i></a> --}}
+									<form action="{{ route('web.addCart') }}" method="post" class="d-inline">
+										@csrf
+										<input type="hidden" name="product_id" value="{{ $san_pham->id }}">
+										<input type="hidden" name="quantity" value="1">
+										<button type="submit" class="btn btn-link p-0"><a><i class="fa fa-cart-plus"></a></i></button>
+									</form>
+									<a href="{{ route('web.shopDetail', $san_pham->id) }}" class="btn btn-link p-0"><i class="fa fa-search"></i></a>
+								</div>
+							</div>
+							<div class="product_btm_text card-body text-center">
+								<h4 class="card-title"><a href="{{ route('web.shopDetail', $san_pham->id) }}">{{ $san_pham->ten_san_pham }}</a></h4>
+								<span class="price">{{ number_format($san_pham->gia, 0, '', '.') }} VND</span>
+							</div>
+						</div>
+					</div> 	
+					 <!-- End Col -->			
                     @endforeach
 				
 			</div>
 		</div>
 	</div>  
+
+
+	<script>
+		var minus = document.querySelector('.minus');
+		var plus = document.querySelector('.plus');
+		var quantityInput = document.querySelector('#quantityInput');
+
+		// Xử lý sự kiện click cho nút trừ
+		minus.addEventListener('click', function () {
+			var currentValue = parseInt(quantityInput.value, 10);
+			if (currentValue > 1) {
+				quantityInput.value = currentValue - 1;
+			} else {
+				alert('Bạn không thể giảm giá trị xuống dưới 1.');
+			}
+		});
+
+		// Xử lý sự kiện click cho nút cộng
+		plus.addEventListener('click', function () {
+			var currentValue = parseInt(quantityInput.value, 10);
+			quantityInput.value = currentValue + 1;
+		});
+
+		// Kiểm tra giá trị khi ô nhập số thay đổi
+		quantityInput.addEventListener('input', function () {
+			var value = parseInt(quantityInput.value, 10);
+			if (isNaN(value) || value < 1) {
+				alert('Bạn hãy nhập số lớn hơn 1');
+				quantityInput.value = 1; // Đặt lại giá trị về 1 nếu giá trị không hợp lệ
+			}
+		});
+
+
+
+	</script>
+
 @endsection

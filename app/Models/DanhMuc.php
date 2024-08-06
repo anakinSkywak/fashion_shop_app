@@ -8,43 +8,46 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DanhMuc extends Model
 {
-    use HasFactory;
-
-    // lấy ra tất cả danh mục
-    public function getDanhMuc(){
+   use HasFactory;
+   protected $fillable = [
+      'ten_danh_muc',
+   ];
+   // lấy ra tất cả danh mục
+   public function getDanhMuc()
+   {
       $danh_mucs = DB::table('danh_mucs')->orderByDesc('id')->get();
 
-       return $danh_mucs;
-       
-    }
-    // lấy ra 1 danh mục theo id
-    public function getOneDanhMuc($id){
-       $danh_muc =  DB::table('danh_mucs')->where('id', $id)->first();
+      return $danh_mucs;
+   }
+   // lấy ra 1 danh mục theo id
+   public function getOneDanhMuc($id)
+   {
+      $danh_muc =  DB::table('danh_mucs')->where('id', $id)->first();
 
-       return $danh_muc;
-       
-    }
+      return $danh_muc;
+   }
    //  lấy số lượng danh mục
-    public function getCountDanhMuc(){
-       $sl_danh_muc =  DB::table('danh_mucs')->count();
+   public function getCountDanhMuc()
+   {
+      $sl_danh_muc =  DB::table('danh_mucs')->count();
 
-       return $sl_danh_muc;
-       
-    }
+      return $sl_danh_muc;
+   }
 
    //  thêm mới danh mục
 
-   public function addDanhMuc($data){
+   public function addDanhMuc($data)
+   {
       DB::table('danh_mucs')->insert([
          'ten_danh_muc' => $data['ten_danh_muc']
       ]);
-
    }
 
 
    // update danh mục
 
-   public function updateDanhMuc($data, $id){
+   public function updateDanhMuc($data, $id)
+   {
       DB::table('danh_mucs')->where('id', $id)->update([
          'ten_danh_muc' => $data['ten_danh_muc']
       ]);
